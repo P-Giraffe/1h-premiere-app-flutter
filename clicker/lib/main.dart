@@ -45,13 +45,12 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'Nombre de clics:',
-            ),
+            Text('Nombre de clics: $_counter'),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            Text("Continuez à cliquer")
           ],
         ),
       ),
