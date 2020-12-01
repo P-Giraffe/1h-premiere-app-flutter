@@ -50,7 +50,10 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
-            Text("Continuez à cliquer")
+            if (_counter > 0) Text("Continuez à cliquer"),
+            if (_counter > 5 && _counter < 10) Text("OK...pas mal"),
+            if (_counter >= 10)
+              Text("Les choses sérieuses peuvent commencer :)")
           ],
         ),
       ),
