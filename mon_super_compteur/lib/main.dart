@@ -29,8 +29,16 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  String _counterName = '';
+
+  void _onCounterNameChanged(String value) {
+    setState(() {
+      _counterName = value;
+    });
+  }
 
   void _incrementCounter() {
+    print('Clic sur le bouton');
     setState(() {
       _counter = _counter + 1;
     });
@@ -47,7 +55,18 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: .center,
           children: [
-            const Text('Nombre de clics:'),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
+              child: TextField(
+                decoration: const InputDecoration(
+                  labelText: 'Nom du compteur',
+                  border: OutlineInputBorder(),
+                ),
+                onChanged: _onCounterNameChanged,
+              ),
+            ),
+            const SizedBox(height: 24),
+            Text('Nombre de clics $_counterName:'),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
