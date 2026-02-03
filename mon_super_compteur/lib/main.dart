@@ -91,6 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
+            if (_counter > 10) Text('Ca commence à faire du bruit !'),
           ],
         ),
       ),
