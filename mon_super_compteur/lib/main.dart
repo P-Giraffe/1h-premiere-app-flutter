@@ -30,6 +30,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   String _counterName = '';
+  bool _isEditingCounterName = false;
 
   void _onCounterNameChanged(String value) {
     setState(() {
@@ -44,6 +45,12 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _toggleEditingCounterName() {
+    setState(() {
+      _isEditingCounterName = !_isEditingCounterName;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,24 +62,35 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: .center,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32.0),
-              child: TextField(
-                decoration: const InputDecoration(
-                  labelText: 'Nom du compteur',
-                  border: OutlineInputBorder(),
-                ),
-                onChanged: _onCounterNameChanged,
-              ),
-            ),
             const SizedBox(height: 24),
-            Text('Nombre de clics $_counterName:'),
+            if (_isEditingCounterName)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                child: TextField(
+                  decoration: const InputDecoration(
+                    labelText: 'Nom du compteur',
+                    border: OutlineInputBorder(),
+                  ),
+                  onChanged: _onCounterNameChanged,
+                  onSubmitted: (_) => _toggleEditingCounterName(),
+                  onTapOutside: (_) => _toggleEditingCounterName(),
+                ),
+              )
+            else
+              Text(
+                _counterName,
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
+            if (_isEditingCounterName == false)
+              TextButton.icon(
+                icon: const Icon(Icons.edit),
+                label: const Text('Modifier'),
+                onPressed: _toggleEditingCounterName,
+              ),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            if (_counter > 10)
-              Text('Ca commence à faire du bruit !dfssdfsdfsdfsdfsdfsdfsdfsfd'),
           ],
         ),
       ),
